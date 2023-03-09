@@ -8,7 +8,7 @@ public class Debuff : MonoBehaviour
 
     public static Dictionary<string, Dictionary<GameObject, int>> debuffStacks = new Dictionary<string, Dictionary<GameObject, int>>();
     private static Dictionary<string, Dictionary<GameObject, float>> debuffTimes = new Dictionary<string, Dictionary<GameObject, float>>();
-    private static Dictionary<string, Dictionary<GameObject, Image>> debuffSprite = new Dictionary<string, Dictionary<GameObject, Image>>();
+    //private static Dictionary<string, Dictionary<GameObject, Image>> debuffSprite = new Dictionary<string, Dictionary<GameObject, Image>>();
 
     private float debuffDuration = 15f;
     private int maxStacks = 5;

@@ -2,37 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Stats : MonoBehaviour
 {
     [HideInInspector] public Debuff debuff;
     ActivateDebuffs activateDebuffs;
 
     public float health;
-    public float maxHealth = 1000;
+    public float characterMaxHealth = 500;
+    public float maxHealth;
+    float healthRegeneration;
+
     public float armor;
-    public float maxArmor = 50;
+    public float startingArmor = 50;
 
     // Start is called before the first frame update
     void Start()
     {
-        debuff = new Debuff();
         activateDebuffs = GetComponent<ActivateDebuffs>();
+        debuff = new Debuff();
 
-        health = maxHealth;
-        armor = maxArmor;
+        health = characterMaxHealth;
+        armor = startingArmor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (debuff.GetStacks("Earthen Spike Debuff", this.gameObject) == 0)
+        if (debuff.GetStacks("Chrono Regen Buff", this.gameObject) == 0)
         {
-            armor = maxArmor;
-        }
-        
-        if (debuff.GetStacks("Thunderous Curse Debuff", this.gameObject) == 0)
-        {
-            activateDebuffs.CancelDoT();
+            activateDebuffs.CancelHoT();
         }
     }
 }
