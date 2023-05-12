@@ -22,18 +22,34 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     PlayerDirections directions;
     [HideInInspector] public CameraController mainCam;
+    public Animator anim;
+    public bool canMove = true;
 
     void Start()
     {
         controls = GetComponent<Controls>();
         controller = GetComponent<CharacterController>();
         directions = GetComponent<PlayerDirections>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        GetInputs();
-        Locomotion();
+        if (canMove)
+        {
+            GetInputs();
+            Locomotion();
+        }
+        else
+        {
+            inputs.x = 0;
+            anim.SetFloat("X", 0);
+            inputs.y = 0;
+            anim.SetFloat("Y", 0);
+            rotation = 0;
+            Locomotion();
+        }
+
     }
 
     //Motions
@@ -66,20 +82,32 @@ public class PlayerMovement : MonoBehaviour
     {
         //Forwards
         if (Input.GetKey(controls.forwards))
+        {
             inputs.y = 1;
+            anim.SetFloat("Y", 1);
+        }
 
         //Backwards
         if (Input.GetKey(controls.backwards))
         {
             if (Input.GetKey(controls.forwards))
+            {
                 inputs.y = 0;
+                anim.SetFloat("Y", 0);
+            }
             else
+            {
                 inputs.y = -1;
+                anim.SetFloat("Y", -1);
+            }
         }
 
         //FW Nothing
         if (!Input.GetKey(controls.forwards) && !Input.GetKey(controls.backwards))
+        {
             inputs.y = 0;
+            anim.SetFloat("Y", 0);
+        }
 
         if (autoRun)
         {
@@ -90,39 +118,63 @@ public class PlayerMovement : MonoBehaviour
 
         //Strafe Left
         if (Input.GetKey(controls.strafeRight))
+        {
             inputs.x = 1;
+            anim.SetFloat("X", 1);
+        }
 
         //Strafe Right
         if (Input.GetKey(controls.strafeLeft))
         {
             if (Input.GetKey(controls.strafeRight))
+            {
                 inputs.x = 0;
+                anim.SetFloat("X", 0);
+            }
             else
+            {
                 inputs.x = -1;
+                anim.SetFloat("X", -1);
+            }
         }
 
         //Strafe LR Nothing
         if (!Input.GetKey(controls.strafeRight) && !Input.GetKey(controls.strafeLeft))
+        {
             inputs.x = 0;
+            anim.SetFloat("X", 0);
+        }
 
         if (steer)
         {
             //Rotate Left
             if (Input.GetKey(controls.rotateRight))
+            {
                 inputs.x = 1;
+                anim.SetFloat("X", 1);
+            }
 
             //Rotate Right
             if (Input.GetKey(controls.rotateLeft))
             {
                 if (Input.GetKey(controls.rotateRight))
+                {
                     inputs.x = 0;
+                    anim.SetFloat("X", 0);
+                }
                 else
+                {
                     inputs.x = -1;
+                    anim.SetFloat("X", -1);
+                }
             }
 
             //Rotate LR Nothing
             if (!Input.GetKey(controls.rotateRight) && !Input.GetKey(controls.rotateLeft))
+            {
                 inputs.x = 0;
+                anim.SetFloat("X", 0);
+            }
 
             inputs.x = Mathf.Clamp(inputs.x, -1, 1);
         }
@@ -148,12 +200,6 @@ public class PlayerMovement : MonoBehaviour
             if (!Input.GetKey(controls.rotateRight) && !Input.GetKey(controls.rotateLeft))
                 rotation = 0;
         }
-    }
-
-    //Triggers
-    private void OnTriggerEnter(Collider trigger)
-    {
-        
     }
 }
 

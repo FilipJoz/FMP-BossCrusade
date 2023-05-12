@@ -9,10 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512591f66d77fc145ace43c50876bdf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fa8be146329ab14597cf2be98ff7e46, type: 3}
   m_Name: Stomp
   m_EditorClassIdentifier: 
-  attackName: 
-  damage: 0
-  range: 0
-  attackDuration: 0
+  attackName: Stomp
+  damage: 150
+  range: 10
+  hasIndicator: 1
+  createIndicatorOnTarget: 0
+  impactAreaSize: 5
+  timeToImpact: 2
+  attackDuration: 5
+  animationClip: {fileID: 7400000, guid: 11b45dfa90a816e458e53e4c5048d714, type: 2}
+  target:
+  - {fileID: 0}
+  castTime: 1

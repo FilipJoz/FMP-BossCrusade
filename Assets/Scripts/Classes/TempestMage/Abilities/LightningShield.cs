@@ -10,6 +10,7 @@ public class LightningShield : MonoBehaviour
 
     [SerializeField] GameObject ability;
     [SerializeField] GameObject abilityFill;
+    [SerializeField] GameObject VFXShield;
     TMP_Text abilityCounter;
 
     float abilityCd = 30.0f;
@@ -27,6 +28,7 @@ public class LightningShield : MonoBehaviour
         abilityCounter = ability.GetComponentInChildren<TMP_Text>();
 
         currentShieldHealth = 0f;
+        VFXShield.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -88,9 +90,13 @@ public class LightningShield : MonoBehaviour
     IEnumerator ShieldCoroutine()
     {
         currentShieldHealth = bonusShieldHealth;
+        VFXShield.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(5f);
 
         currentShieldHealth = 0f;
+        VFXShield.gameObject.SetActive(false);
     }
+
+    
 }

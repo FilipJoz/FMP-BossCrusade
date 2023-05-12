@@ -45,6 +45,8 @@ public class LightningBolt : MonoBehaviour
         {
             abilityTimer = abilityCd * tempestMage.CdMultiplier;
 
+            tempestMage.playerMovement.canMove = false;
+            tempestMage.anim.SetTrigger("LightningBolt");
             StartCasting();
 
             Debug.Log("Lightning Bolt used");
@@ -112,7 +114,8 @@ public class LightningBolt : MonoBehaviour
     }
     void SpawnProjectile ()
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
 
         LightningBoltController projectileController = projectile.GetComponent<LightningBoltController>();
         projectileController.target = tempestMage.enemy.gameObject;

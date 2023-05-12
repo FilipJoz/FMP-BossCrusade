@@ -12,6 +12,8 @@ public class EarthenGuardian : MonoBehaviour
     EarthenSmash earthenSmash;
     EarthBarrier earthBarrier;
     Stonewall stonewall;
+    public Animator anim;
+    public PlayerMovement playerMovement;
 
     [SerializeField] Slider healthSlider;
     [SerializeField] RectTransform shieldBar;
@@ -26,7 +28,7 @@ public class EarthenGuardian : MonoBehaviour
 
     [HideInInspector] public float CdMultiplier = 1.0f;
 
-    [HideInInspector] public bool enemyTarget = false;
+    public bool enemyTarget = true;
     [HideInInspector] public bool inMeleeRange = false;
     [HideInInspector] public bool isInfront = false;
     [HideInInspector] public bool isCasting = false;
@@ -40,6 +42,8 @@ public class EarthenGuardian : MonoBehaviour
         earthBarrier = GetComponent<EarthBarrier>();
         stonewall = GetComponent<Stonewall>();
         debuff = GetComponent<Debuff>();
+        anim = GetComponent<Animator>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -53,37 +57,8 @@ public class EarthenGuardian : MonoBehaviour
 
     void GetTarget()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo;
 
-            if (Physics.Raycast(ray, out hitInfo))
-            {
-                string hitObjectTag = hitInfo.collider.tag;
-                Debug.Log("Clicked on object with tag: " + hitObjectTag);
-
-                if (hitObjectTag == "Enemy")
-                {
-                    enemy = hitInfo.collider.GetComponent<Enemy>();
-                    targetHealth = target.GetComponentInChildren<Slider>().value;
-                    enemyTarget = true;
-                    target.gameObject.SetActive(true);
-                    List<string> activeDebuffs = debuff.GetActiveDebuffs(enemy.gameObject);
-                    foreach (var debuff in activeDebuffs)
-                    {
-                        Debug.Log("Debuff: " + debuff);
-                    }
-
-                    Debug.Log("Active Debuffs: " + string.Join(", ", activeDebuffs));
-                }
-                else
-                {
-                    enemyTarget = false;
-                    target.gameObject.SetActive(false);
-                }
-            }
-        }
+        targetHealth = target.GetComponentInChildren<Slider>().value;
 
         GetEnemyAngle();
     }
@@ -166,12 +141,8 @@ public class EarthenGuardian : MonoBehaviour
         }
 
     }
-
-    private void OnTriggerExit(Collider collision)
+    public void OnAttackEnd()
     {
-        if (collision.gameObject == enemy.gameObject)
-        {
-            inMeleeRange = false;
-        }
+        playerMovement.canMove = true;
     }
 }

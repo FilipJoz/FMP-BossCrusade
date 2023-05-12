@@ -10,6 +10,7 @@ public class Thunderstorm : MonoBehaviour
 
     [SerializeField] GameObject ability;
     [SerializeField] GameObject abilityFill;
+    [SerializeField] GameObject vfxPrefab;
     TMP_Text abilityCounter;
 
     float abilityCd = 8.0f;
@@ -48,6 +49,9 @@ public class Thunderstorm : MonoBehaviour
             abilityTimer = abilityCd * tempestMage.CdMultiplier;
 
             targetPosition = tempestMage.enemy.gameObject.transform.position;
+
+            tempestMage.playerMovement.canMove = false;
+            tempestMage.anim.SetTrigger("Thunderstorm");
 
             SpawnAbility();
 
@@ -131,5 +135,21 @@ public class Thunderstorm : MonoBehaviour
             CancelInvoke("DealDamage");
             currentChannelTime = 0f;
         }
+    }
+    void StartTornadoVFX()
+    {
+        StartCoroutine(SpawnTornadoVFX());
+    }
+
+    IEnumerator SpawnTornadoVFX()
+    {
+        // Instantiate the VFX prefab at the spawn point
+        GameObject vfxInstance = Instantiate(vfxPrefab, targetPosition, Quaternion.identity);
+
+        // Wait for the VFX to finish playing
+        yield return new WaitForSeconds(3);
+
+        // Destroy the VFX instance
+        Destroy(vfxInstance.gameObject);
     }
 }

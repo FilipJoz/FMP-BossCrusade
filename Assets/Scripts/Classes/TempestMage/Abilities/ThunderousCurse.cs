@@ -41,6 +41,9 @@ public class ThunderousCurse : MonoBehaviour
         {
             abilityTimer = abilityCd * tempestMage.CdMultiplier;
 
+            tempestMage.playerMovement.canMove = false;
+            tempestMage.anim.SetTrigger("ThunderousCurse");
+
             debuff.ApplyDebuff("Thunderous Curse Debuff", tempestMage.enemy.gameObject);
             tempestMage.enemy.gameObject.GetComponent<ActivateDebuffs>().DoTInvoke();
 

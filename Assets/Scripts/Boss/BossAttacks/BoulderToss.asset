@@ -9,10 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512591f66d77fc145ace43c50876bdf3, type: 3}
+  m_Script: {fileID: 11500000, guid: e5ba52e60e89eb944949af29a9660f34, type: 3}
   m_Name: BoulderToss
-  m_EditorClassIdentifier: 
-  attackName: 
-  damage: 0
-  range: 0
-  attackDuration: 0
+  m_EditorClassIdentifier: Assembly-CSharp::BoulderTossAttack
+  attackName: BoulderToss
+  damage: 50
+  range: 25
+  hasIndicator: 1
+  createIndicatorOnTarget: 1
+  requiresTarget: 1
+  impactAreaSize: 5
+  timeToImpact: 2
+  attackDuration: 5
+  animationClip: {fileID: 7400000, guid: da4b7c8270f622344b5f98bb13040251, type: 2}
+  target:
+  - {fileID: 0}
+  boulderPrefab: {fileID: 6357306903912336046, guid: e6397aae5ecd57f4a9105da2aaa91d7e, type: 3}
+  boulderThrowForce: 100
+  gravity: -9.81

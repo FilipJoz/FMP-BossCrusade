@@ -45,6 +45,9 @@ public class TemporalHealing : MonoBehaviour
         {
             abilityTimer = abilityCd * chronoMedic.CdMultiplier;
 
+            chronoMedic.playerMovement.canMove = false;
+            chronoMedic.anim.SetTrigger("TemporalHealing");
+
             StartCasting();
 
             Debug.Log("Temporal Healing used");

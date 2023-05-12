@@ -9,10 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512591f66d77fc145ace43c50876bdf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6aa4cf9863cc5c84e9a3d31f5ab4d9a7, type: 3}
   m_Name: Quake
   m_EditorClassIdentifier: 
-  attackName: 
-  damage: 0
-  range: 0
-  attackDuration: 0
+  attackName: Quake
+  damage: 50
+  range: 15
+  hasIndicator: 1
+  createIndicatorOnTarget: 0
+  impactAreaSize: 10
+  timeToImpact: 1
+  attackDuration: 5
+  animationClip: {fileID: 7400000, guid: 890b1ac212696bc428940c3f818f40b8, type: 2}
+  target: []

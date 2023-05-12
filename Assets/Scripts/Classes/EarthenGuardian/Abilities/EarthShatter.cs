@@ -10,6 +10,7 @@ public class EarthShatter : MonoBehaviour
 
     [SerializeField] GameObject ability;
     [SerializeField] GameObject abilityFill;
+    [SerializeField] GameObject vfxPrefab;
     TMP_Text abilityCounter;
 
     float abilityCd = 8.0f;
@@ -41,6 +42,9 @@ public class EarthShatter : MonoBehaviour
         if (Input.GetKey(controls.ability3) && abilityTimer <= 0 && !earthenGuardian.isCasting)
         {
             abilityTimer = abilityCd * earthenGuardian.CdMultiplier;
+
+            earthenGuardian.playerMovement.canMove = false;
+            earthenGuardian.anim.SetTrigger("EarthShatter");
 
             DealDamage();
 
@@ -91,6 +95,23 @@ public class EarthShatter : MonoBehaviour
                 enemyHealth.health -= abilityDamage;
             }
         }
+    }
+
+    public void StartVFX()
+    {
+        StartCoroutine(SpawnVFX());
+    }
+
+    IEnumerator SpawnVFX()
+    {
+        // Instantiate the VFX prefab at the spawn point
+        GameObject vfxInstance = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
+
+        // Wait for the VFX to finish playing
+        yield return new WaitForSeconds(2);
+
+        // Destroy the VFX instance
+        Destroy(vfxInstance.gameObject);
     }
 
     void OnDrawGizmos()

@@ -2,53 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BossAttacks", menuName = "Boss Attacks", order = 1)]
 public class BossAttacks : ScriptableObject
 {
     public string attackName;
     public float damage;
     public float range;
+
+    public bool hasIndicator;
+    public bool createIndicatorOnTarget;
+    public bool requiresTarget;
+
+    public float impactAreaSize;
+    public float timeToImpact;
     public float attackDuration;
+
+
     public AnimationClip animationClip;
     public GameObject[] target;
 
-    public void PerformAttack()
+    public virtual void PerformAttack(Animator animator, Transform bossTransform)
     {
-        switch (attackName)
-        {
-            case "BasicAttack":
-
-                break;
-            case "BoulderToss":
-
-                break;
-            case "EarthquakeSlam":
-
-                break;
-            case "EnhancedEarthquakeSlam":
-
-                break;
-            case "Fury":
-
-                break;
-            case "Quake":
-
-                break;
-            case "SoulSteel":
-
-                break;
-            case "Stomp":
-
-                break;
-            case "ToxicEruptionMulti":
-
-                break;
-            case "ToxicEruption":
-
-                break;
-            default:
-                break;
-        }
+        animator.SetTrigger(attackName);
     }
 }
 

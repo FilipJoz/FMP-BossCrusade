@@ -9,10 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512591f66d77fc145ace43c50876bdf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ce83d38490cca746bb17cc7b5582f5b, type: 3}
   m_Name: ToxicEruptionMulti
   m_EditorClassIdentifier: 
-  attackName: 
+  attackName: ToxicEruptionMulti
   damage: 0
-  range: 0
-  attackDuration: 0
+  range: 15
+  hasIndicator: 0
+  createIndicatorOnTarget: 0
+  requiresTarget: 1
+  impactAreaSize: 0
+  timeToImpact: 0
+  attackDuration: 5
+  animationClip: {fileID: 7400000, guid: a7a4e05fb31a24b4e9e978420019c4a6, type: 2}
+  target: []

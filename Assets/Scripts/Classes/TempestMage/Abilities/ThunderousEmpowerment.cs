@@ -11,6 +11,7 @@ public class ThunderousEmpowerment : MonoBehaviour
     [SerializeField] GameObject ability;
     [SerializeField] GameObject abilityFill;
     [SerializeField] GameObject UiArmorBuff;
+    [SerializeField] GameObject vfxPrefab;
     TMP_Text abilityCounter;
 
     float abilityCd = 5.0f;
@@ -43,6 +44,9 @@ public class ThunderousEmpowerment : MonoBehaviour
         if (Input.GetKey(controls.ability6) && abilityTimer <= 0 && !tempestMage.isCasting)
         {
             abilityTimer = abilityCd * tempestMage.CdMultiplier;
+
+            tempestMage.playerMovement.canMove = false;
+            tempestMage.anim.SetTrigger("ThunderousEmpowerment");
 
             ActivateBuff();
 
@@ -108,5 +112,22 @@ public class ThunderousEmpowerment : MonoBehaviour
     void UiBuffDeactivate()
     {
         UiArmorBuff.SetActive(false);
+    }
+
+    void StartAuraVFX()
+    {
+        StartCoroutine(SpawnAuraVFX());
+    }
+
+    IEnumerator SpawnAuraVFX()
+    {
+        // Instantiate the VFX prefab at the spawn point
+        GameObject vfxInstance = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
+
+        // Wait for the VFX to finish playing
+        yield return new WaitForSeconds(1);
+
+        // Destroy the VFX instance
+        Destroy(vfxInstance.gameObject);
     }
 }

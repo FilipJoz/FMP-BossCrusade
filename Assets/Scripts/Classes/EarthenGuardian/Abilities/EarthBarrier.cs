@@ -11,6 +11,7 @@ public class EarthBarrier : MonoBehaviour
 
     [SerializeField] GameObject ability;
     [SerializeField] GameObject abilityFill;
+    [SerializeField] GameObject VFXShield;
     TMP_Text abilityCounter;
 
     float abilityCd = 16.0f;
@@ -30,12 +31,14 @@ public class EarthBarrier : MonoBehaviour
         abilityCounter = ability.GetComponentInChildren<TMP_Text>();
 
         currentShieldHealth = 0f;
+        VFXShield.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         UseAbility();
+        AddVFX();
     }
 
     void UseAbility()
@@ -97,6 +100,18 @@ public class EarthBarrier : MonoBehaviour
         if (currentShieldHealth >= maxShieldHealth)
         {
             currentShieldHealth = maxShieldHealth;
+        }
+    }
+
+    void AddVFX()
+    {
+        if (currentShieldHealth > 0)
+        {
+            VFXShield.gameObject.SetActive(true);
+        }
+        else 
+        {
+            VFXShield.gameObject.SetActive(false);
         }
     }
 }

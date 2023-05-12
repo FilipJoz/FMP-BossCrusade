@@ -12,6 +12,7 @@ public class RallyingCry : MonoBehaviour
     [SerializeField] GameObject ability;
     [SerializeField] GameObject abilityFill;
     [SerializeField] GameObject UiArmorBuff;
+    [SerializeField] GameObject vfxPrefab;
     TMP_Text abilityCounter;
 
     float abilityCd = 5.0f;
@@ -46,6 +47,9 @@ public class RallyingCry : MonoBehaviour
         if (Input.GetKey(controls.ability6) && abilityTimer <= 0 && !earthenGuardian.isCasting)
         {
             abilityTimer = abilityCd * earthenGuardian.CdMultiplier;
+
+            earthenGuardian.playerMovement.canMove = false;
+            earthenGuardian.anim.SetTrigger("RallyingCry");
 
             ActivateBuff();
 
@@ -111,5 +115,21 @@ public class RallyingCry : MonoBehaviour
     void UiBuffDeactivate()
     {
         UiArmorBuff.SetActive(false);
+    }
+    public void StartAuraVFX()
+    {
+        StartCoroutine(SpawnAuraVFX());
+    }
+
+    IEnumerator SpawnAuraVFX()
+    {
+        // Instantiate the VFX prefab at the spawn point
+        GameObject vfxInstance = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
+
+        // Wait for the VFX to finish playing
+        yield return new WaitForSeconds(1);
+
+        // Destroy the VFX instance
+        Destroy(vfxInstance.gameObject);
     }
 }

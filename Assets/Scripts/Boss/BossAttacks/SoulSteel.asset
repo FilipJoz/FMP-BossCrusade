@@ -9,10 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512591f66d77fc145ace43c50876bdf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 549a22113c00f1144a7295f48476562f, type: 3}
   m_Name: SoulSteel
   m_EditorClassIdentifier: 
-  attackName: 
-  damage: 0
-  range: 0
-  attackDuration: 0
+  attackName: SoulSteel
+  damage: 10
+  range: 20
+  hasIndicator: 0
+  createIndicatorOnTarget: 0
+  requiresTarget: 1
+  impactAreaSize: 0
+  timeToImpact: 0
+  attackDuration: 8
+  animationClip: {fileID: 7400000, guid: 1ff9be5e76b01924e825d992dfaabe35, type: 2}
+  target:
+  - {fileID: 0}
+  drainRate: 10
+  drainDuration: 8
+  pauseTime: 1.5
+  resumeTime: 5
+  ballSpeed: 10
+  ballDestroyDistance: 3
+  vfxPrefab: {fileID: 220296862010837837, guid: 9d88684a532ca034dae5daf4707478af, type: 3}

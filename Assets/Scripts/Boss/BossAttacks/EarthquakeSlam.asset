@@ -9,12 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 512591f66d77fc145ace43c50876bdf3, type: 3}
+  m_Script: {fileID: 11500000, guid: fb8674f0b5f8fd441b4396507b70d405, type: 3}
   m_Name: EarthquakeSlam
   m_EditorClassIdentifier: 
   attackName: EarthquakeSlam
   damage: 0
-  range: 0
-  attackDuration: 0
-  animationClip: {fileID: 0}
-  target: []
+  range: 15
+  hasIndicator: 1
+  createIndicatorOnTarget: 0
+  requiresTarget: 1
+  impactAreaSize: 15
+  timeToImpact: 3
+  attackDuration: 5
+  animationClip: {fileID: 7400000, guid: 825dc8a467d06fd4ca600f16aaf01ce3, type: 2}
+  target:
+  - {fileID: 0}
+  earthquakePrefab: {fileID: 6844137639113442074, guid: 54a959026475cde40af35d74bbe5850b, type: 3}
+  delay: 3

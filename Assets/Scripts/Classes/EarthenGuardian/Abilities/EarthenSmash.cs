@@ -10,6 +10,7 @@ public class EarthenSmash : MonoBehaviour
 
     [SerializeField] GameObject ability;
     [SerializeField] GameObject abilityFill;
+    [SerializeField] GameObject vfxPrefab;
     TMP_Text abilityCounter;
 
     float abilityCd = 8.0f;
@@ -47,6 +48,8 @@ public class EarthenSmash : MonoBehaviour
         {
             abilityTimer = abilityCd * earthenGuardian.CdMultiplier;
 
+            earthenGuardian.playerMovement.canMove = false;
+            earthenGuardian.anim.SetTrigger("EarthenSmash");
             StartCasting();
 
             Debug.Log("Earthen Smash used");
@@ -143,9 +146,24 @@ public class EarthenSmash : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
+    public void StartSlashVFX()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(earthenGuardian.enemy.transform.position, radius);
+        StartCoroutine(SpawnSlashVFX());
+    }
+
+    IEnumerator SpawnSlashVFX()
+    {
+        // Set the spawn position
+        Vector3 spawnPosition = transform.position;
+        spawnPosition.y += 2; // Increase the y position
+
+        // Instantiate the VFX prefab at the spawn point
+        GameObject vfxInstance = Instantiate(vfxPrefab, spawnPosition, transform.rotation);
+
+        // Wait for the VFX to finish playing
+        yield return new WaitForSeconds(2);
+
+        // Destroy the VFX instance
+        Destroy(vfxInstance.gameObject);
     }
 }

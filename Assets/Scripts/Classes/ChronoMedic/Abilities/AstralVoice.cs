@@ -46,6 +46,8 @@ public class AstralVoice : MonoBehaviour
         if (Input.GetKey(controls.ability6) && abilityTimer <= 0 && !chronoMedic.isCasting)
         {
             abilityTimer = abilityCd * chronoMedic.CdMultiplier;
+            chronoMedic.playerMovement.canMove = false;
+            chronoMedic.anim.SetTrigger("AstralVoice");
 
             ActivateBuff();
 

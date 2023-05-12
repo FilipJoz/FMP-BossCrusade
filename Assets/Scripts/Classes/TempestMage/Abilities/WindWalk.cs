@@ -11,6 +11,7 @@ public class WindWalk : MonoBehaviour
 
     [SerializeField] GameObject ability;
     [SerializeField] GameObject abilityFill;
+    [SerializeField] GameObject VFXPrefab;
     TMP_Text abilityCounter;
 
     float abilityCd = 5.0f;
@@ -24,6 +25,8 @@ public class WindWalk : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         controls = GetComponent<Controls>();
         abilityCounter = ability.GetComponentInChildren<TMP_Text>();
+
+        VFXPrefab.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -85,9 +88,11 @@ public class WindWalk : MonoBehaviour
     IEnumerator SpeedCoroutine()
     {
         playerMovement.runSpeed = 20;
+        VFXPrefab.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(3f);
 
         playerMovement.runSpeed = 10;
+        VFXPrefab.gameObject.SetActive(false);
     }
 }

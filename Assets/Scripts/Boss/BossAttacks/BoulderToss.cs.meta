@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: e5ba52e60e89eb944949af29a9660f34
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - animationClip: {fileID: 7400000, guid: da4b7c8270f622344b5f98bb13040251, type: 2}
+  - boulderPrefab: {fileID: 6357306903912336046, guid: e6397aae5ecd57f4a9105da2aaa91d7e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

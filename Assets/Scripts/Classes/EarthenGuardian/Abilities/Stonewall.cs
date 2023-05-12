@@ -46,6 +46,9 @@ public class Stonewall : MonoBehaviour
         {
             abilityTimer = abilityCd * earthenGuardian.CdMultiplier;
 
+            earthenGuardian.playerMovement.canMove = false;
+            earthenGuardian.anim.SetTrigger("Stonewall");
+
             StartCasting();
 
             Debug.Log("Stonewall used");
@@ -66,8 +69,9 @@ public class Stonewall : MonoBehaviour
     void SpawnShield()
     {
         // Spawn the shield in front of the character
-        Vector3 spawnPosition = transform.position + transform.forward * 2f;
-        GameObject shield = Instantiate(shieldPrefab, spawnPosition, Quaternion.identity);
+        Vector3 position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
+        Vector3 spawnPosition = position + transform.forward * 5f;
+        GameObject shield = Instantiate(shieldPrefab, spawnPosition, transform.rotation);
         // Set the duration of the shield
         Destroy(shield, 7f);
     }

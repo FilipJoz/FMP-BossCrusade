@@ -70,6 +70,7 @@ public class PlayerJump : MonoBehaviour
     //Jump
     void Jump()
     {
+        playerMovement.anim.SetTrigger("Jump");
         //Set jumping to true
         if (!jumping)
             jumping = true;

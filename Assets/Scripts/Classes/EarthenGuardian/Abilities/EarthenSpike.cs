@@ -11,6 +11,7 @@ public class EarthenSpike : MonoBehaviour
 
     [SerializeField] GameObject ability;
     [SerializeField] GameObject abilityFill;
+    [SerializeField] GameObject vfxPrefab;
     TMP_Text abilityCounter;
 
     float abilityCd = 5.0f;
@@ -42,6 +43,9 @@ public class EarthenSpike : MonoBehaviour
         if (Input.GetKey(controls.ability1) && abilityTimer <= 0 && earthenGuardian.inMeleeRange && earthenGuardian.isInfront && !earthenGuardian.isCasting) 
         {
             abilityTimer = abilityCd * earthenGuardian.CdMultiplier;
+
+            earthenGuardian.playerMovement.canMove = false;
+            earthenGuardian.anim.SetTrigger("EarthenSpike");
 
             DealDamage();
             debuff.ApplyDebuff("Earthen Spike Debuff", earthenGuardian.enemy.gameObject);
@@ -109,4 +113,30 @@ public class EarthenSpike : MonoBehaviour
             Debug.Log("Earthen Spike Debuff: " + debuff.GetStacks("Earthen Spike Debuff", earthenGuardian.enemy.gameObject));
         }
     }
+
+    public void StartSpikeVFX()
+    {
+        StartCoroutine(SpawnSpikeVFX());
+    }
+
+    IEnumerator SpawnSpikeVFX()
+    {
+        // Set the spawn position
+        Vector3 spawnPosition = transform.position;
+        spawnPosition.y += 2; // Increase the y position
+
+        // Set the spawn rotation
+        Quaternion spawnRotation = transform.rotation;
+        spawnRotation *= Quaternion.Euler(0, 0, 30); // Tilt to the right by 10 degrees
+
+        // Instantiate the VFX prefab at the spawn point with the adjusted position and rotation
+        GameObject vfxInstance = Instantiate(vfxPrefab, spawnPosition, spawnRotation);
+
+        // Wait for the VFX to finish playing
+        yield return new WaitForSeconds(2);
+
+        // Destroy the VFX instance
+        Destroy(vfxInstance.gameObject);
+    }
+
 }

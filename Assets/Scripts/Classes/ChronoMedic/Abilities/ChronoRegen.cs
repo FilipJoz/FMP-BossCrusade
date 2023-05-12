@@ -41,6 +41,9 @@ public class ChronoRegen : MonoBehaviour
         {
             abilityTimer = abilityCd * chronoMedic.CdMultiplier;
 
+            chronoMedic.playerMovement.canMove = false;
+            chronoMedic.anim.SetTrigger("ChronoRegen");
+
             debuff.ApplyDebuff("Chrono Regen Buff", chronoMedic.targetStats.gameObject);
             chronoMedic.targetStats.gameObject.GetComponent<ActivateDebuffs>().HoTInvoke();
 

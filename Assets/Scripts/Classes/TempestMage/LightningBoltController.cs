@@ -23,7 +23,8 @@ public class LightningBoltController : MonoBehaviour
         }
 
         // Move towards the target
-        transform.position = Vector3.MoveTowards(transform.position, targetLocation.position, speed * Time.deltaTime);
+        Vector3 targetPosition = new Vector3(targetLocation.position.x, targetLocation.position.y + 8f, targetLocation.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
         // Rotate towards the target
         transform.LookAt(targetLocation);

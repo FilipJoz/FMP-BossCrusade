@@ -8,6 +8,8 @@ public class ChronoMedic : MonoBehaviour
     public SphereCollider range;
 
     TemporalHealing temporalHealing;
+    public Animator anim;
+    public PlayerMovement playerMovement;
 
     [SerializeField] Slider healthSlider;
 
@@ -32,6 +34,8 @@ public class ChronoMedic : MonoBehaviour
     {
         stats = GetComponent<Stats>();
         temporalHealing = GetComponent<TemporalHealing>();
+        anim = GetComponent<Animator>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -45,30 +49,9 @@ public class ChronoMedic : MonoBehaviour
 
     void GetTarget()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo;
 
-            if (Physics.Raycast(ray, out hitInfo))
-            {
-                string hitObjectTag = hitInfo.collider.tag;
-                Debug.Log("Clicked on object with tag: " + hitObjectTag);
+        targetHealth = target.GetComponentInChildren<Slider>().value;
 
-                if (hitObjectTag == "EarthenGuardian" || hitObjectTag == "TempestMage" || hitObjectTag == "ChronoMedic" || hitObjectTag == "Friendly")
-                {
-                    targetStats = hitInfo.collider.GetComponent<Stats>();
-                    targetHealth = target.GetComponentInChildren<Slider>().value;
-                    friendlyTarget = true;
-                    target.gameObject.SetActive(true);
-                }
-                else
-                {
-                    friendlyTarget = false;
-                    target.gameObject.SetActive(false);
-                }
-            }
-        }
 
         GetTargetAngle();
     }
@@ -130,13 +113,5 @@ public class ChronoMedic : MonoBehaviour
             inRange = false;
         }
 
-    }
-
-    private void OnTriggerExit(Collider collision)
-    {
-        if (collision.gameObject == targetStats.gameObject)
-        {
-            inRange = false;
-        }
     }
 }
